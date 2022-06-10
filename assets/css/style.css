@@ -25,6 +25,16 @@ header h1 {
   margin: 0px;
 }
 
+.container-fluid {
+  padding-left: 0px;
+}
+
+.current-weather {
+  border: 2px solid black;
+  border-radius: 5px;
+  margin: 15px 0px;
+}
+
 
 /* BUTTONS */
 .btn-search {

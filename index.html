@@ -18,7 +18,7 @@
   </header>
 
   <div class="container-fluid">
-    <div class="row">
+    <div class="row m-2">
 
       <sidebar class="col-3">
           <h2 class="mt-2 font-weight-bold">Search for a City:</h2>
@@ -29,11 +29,16 @@
           </form>
       </sidebar>
 
-      <main class="col-9 border border-dark">
+      <main class="col-9 current-weather">
         <div>
-          MAIN CONTENT
+          <h2 id="city-input" class="mt-2 font-weight-bold">
+            CITY (06/20/2022)
+            <span id="weather-icon"></span>
+          </h2>
+          <div id="weather-conditions"></div>
         </div>
       </main>
+      
     </div>
   </div>
 
