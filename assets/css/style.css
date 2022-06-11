@@ -4,6 +4,7 @@
   --dk-blue: #230855;
   --deep-blue: #33475b;
   --grey: #b7b7b7;
+  --transparent-blue: #60b4fd3c;
 }
 
 body {
@@ -34,6 +35,41 @@ header h1 {
   border-radius: 5px;
   margin: 15px 0px;
 }
+
+#weather-conditions {
+  font-size: 18px;
+}
+
+.weather-icon {
+  filter: drop-shadow(0px 1px 2px black)
+}
+
+
+.uv-low {
+  background-color: limegreen;
+  border-radius: 5px;
+  padding: 3px 12px;
+}
+
+.uv-med {
+  background-color: yellow;
+  border-radius: 5px;
+  padding: 3px 12px;
+}
+
+.uv-high {
+  background-color: orange;
+  border-radius: 5px;
+  padding: 3px 12px;
+}
+
+.uv-extreme {
+background-color: red;
+border-radius: 5px;
+padding: 3px 12px;
+color: white;
+}
+
 
 
 /* BUTTONS */
