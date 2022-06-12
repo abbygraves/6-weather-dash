@@ -56,7 +56,7 @@ function loadCityHistory() {
 
 
 function getWeather(location) {
-  var apiUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + location + "&appid=f3abb8e7ac5dca95fb34c9719d493299&units=imperial";
+  var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + location + "&appid=f3abb8e7ac5dca95fb34c9719d493299&units=imperial";
 
   fetch(apiUrl).then(function (response) {
     // request was succesful
