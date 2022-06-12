@@ -159,9 +159,9 @@ function displayDailyWeather(dailyWeather, timezone) {
 };
 
 
-cityForm.addEventListener("submit", loadCityHistory);
-cityForm.addEventListener("submit", formSubmitHandler);
 
+cityForm.addEventListener("submit", formSubmitHandler);
+loadCityHistory();
 
 
 
