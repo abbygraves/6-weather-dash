@@ -102,7 +102,7 @@ function displayWeather(data) {
   // (for i = 0 )
 
   var iconCode = data.weather[0].icon;
-  var iconUrl = "http://openweathermap.org/img/wn/" + iconCode + ".png";
+  var iconUrl = "https://openweathermap.org/img/wn/" + iconCode + ".png";
   $('#wicon').attr('src', iconUrl);
 };
 
