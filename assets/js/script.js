@@ -161,7 +161,7 @@ function displayDailyWeather(dailyWeather, timezone) {
 
 
 cityForm.addEventListener("submit", formSubmitHandler);
-loadCityHistory();
+// loadCityHistory();
 
 
 
