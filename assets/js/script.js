@@ -52,6 +52,7 @@ function loadCityHistory() {
     cityArray = savedCityHistory;
   }
 
+
   for (let i = 0; i < cityArray.length; i++) {
     var button = document.createElement('button');
     button.classList = 'btn btn-history w-100';

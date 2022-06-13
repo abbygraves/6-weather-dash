@@ -9,7 +9,9 @@
 ## **Built With:**
 + HTML
 + CSS
-+ JavaScript <img align="right" src="" width="700px" />
++ JavaScript 
+
+<img src="./assets/images/weather-dash-screenshot.png" width="600px" />
 
 <br/>
 
