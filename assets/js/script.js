@@ -51,18 +51,21 @@ function loadCityHistory() {
   if (savedCityHistory !== null) {
     cityArray = savedCityHistory;
   }
+  if (typeof cityArray === "undefined") {
+    cityArray = [];
+  } else {
+    for (let i = 0; i < cityArray.length; i++) {
 
-
-  for (let i = 0; i < cityArray.length; i++) {
-    var button = document.createElement('button');
-    button.classList = 'btn btn-history w-100';
-    button.textContent = cityArray[i];
-    button.addEventListener('click', function () { getLatLong(cityArray[i]) })
-    // console.log(button)
-    // console.log(cityHistoryEl)
-    cityHistoryEl.appendChild(button)
+      var button = document.createElement('button');
+      button.classList = 'btn btn-history w-100';
+      button.textContent = cityArray[i];
+      button.addEventListener('click', function () { getLatLong(cityArray[i]) })
+      // console.log(button)
+      // console.log(cityHistoryEl)
+      cityHistoryEl.appendChild(button)
+    }
+    // console.log('loadCityHistory')
   }
-  // console.log('loadCityHistory')
 };
 
 
@@ -76,7 +79,7 @@ function getWeather(location) {
         getLatLong(data);
         displayWeather(data, location);
       });
-     
+
     }
   })
 };
