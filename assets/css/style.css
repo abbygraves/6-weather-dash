@@ -42,17 +42,16 @@ header h1 {
 }
 
 .weather-icon {
-  filter: drop-shadow(0px 1px 2px black)
+  filter: drop-shadow(0px 1px 2px black);
 }
 
-
-/* .days {
-  width: 10rem;
-  margin: 0px 5px;
-  background-color: var(--lt-blue);
-  border-radius: 3px;
-} */
-
+.card {
+  margin-left: 15px;
+  padding: 15px;
+  font-weight: bolder;
+  color: white;
+  background-color: var(--deep-blue);
+}
 
 /* UV INDEX COLOR CODING START */
 .uv-low {
@@ -87,6 +86,16 @@ color: white;
 .btn-search {
   background-color: var(--lt-blue);
   color: white;
+  border: none;
+  display: block;
+  margin: 15px 0px;
+  padding: 6px 0px;
+  font-size: 17px;
+}
+
+.btn-history {
+  background-color: var(--grey);
+  color: black;
   border: none;
   display: block;
   margin: 15px 0px;

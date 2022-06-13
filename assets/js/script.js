@@ -13,19 +13,20 @@ var windEl = document.querySelector("#wind");
 var humidityEl = document.querySelector("#humidity");
 var uvIndexEl = document.querySelector("#uv-index");
 var dailyWeatherEl = document.querySelector("#daily-weather");
-var cityArray = [];
+var cityArray;
 var cityHistoryEl = document.querySelector("#city-history");
 
 
 function formSubmitHandler(event) {
   event.preventDefault();
   var city = cityInput.value.trim();
-  
+
   if (city) {
     saveCityHistory(city);
     getWeather(city);
     cityInput.value = "";
     dailyWeatherEl.textContent = "";
+    loadCityHistory();
   } else {
     alert("Please enter a city");
   }
@@ -33,25 +34,34 @@ function formSubmitHandler(event) {
 
 
 function saveCityHistory(city) {
+  if (typeof cityArray === "undefined") {
+    cityArray = [];
+  }
   cityArray.push(city);
   console.log(cityArray)
   localStorage.setItem("cityArray", JSON.stringify(cityArray));
-  
+
 };
 
 
 function loadCityHistory() {
-  var saveCityHistory = JSON.parse(localStorage.getItem("cityArray"));
-  console.log(saveCityHistory)
-  // check around here
-  if (cityArray) {
-    for (let i = 0; cityArray.length; i++) {
-      var historyButtonEl = document.createElement("button");
-      historyButtonEl.textContent = cityArray[i];
-      historyButtonEl.classList = "btn-search";
-      cityHistoryEl.appendChild(historyButtonEl);
-    }
+  var savedCityHistory = JSON.parse(localStorage.getItem("cityArray"));
+  // console.log(savedCityHistory)
+
+  if (savedCityHistory !== null) {
+    cityArray = savedCityHistory;
   }
+
+  for (let i = 0; i < cityArray.length; i++) {
+    var button = document.createElement('button');
+    button.classList = 'btn btn-history w-100';
+    button.textContent = cityArray[i];
+    button.addEventListener('click', function () { getLatLong(cityArray[i]) })
+    // console.log(button)
+    // console.log(cityHistoryEl)
+    cityHistoryEl.appendChild(button)
+  }
+  // console.log('loadCityHistory')
 };
 
 
@@ -65,6 +75,7 @@ function getWeather(location) {
         getLatLong(data);
         displayWeather(data, location);
       });
+     
     }
   })
 };
@@ -80,8 +91,6 @@ function getLatLong(data) {
     if (response.ok) {
       response.json().then(function (data) {
         displayUV(data);
-        // console.log(data.timezone)
-        // console.log(dayjs().tz(data.timezone).add(1, "day").startOf("day").format("M/D/YYYY"))
         displayDailyWeather(data.daily, data.timezone);
       });
     }
@@ -96,10 +105,9 @@ function displayWeather(data) {
   humidityEl.textContent = "Humidity: " + data.main.humidity + " %";
 
   var timezone = data.timezon
-  
+
   var rightNow = dayjs().tz(timezone).add(0, "day").startOf("day").format("M/D/YYYY");
   currentDateEl.textContent = rightNow;
-  // (for i = 0 )
 
   var iconCode = data.weather[0].icon;
   var iconUrl = "https://openweathermap.org/img/wn/" + iconCode + ".png";
@@ -130,10 +138,13 @@ function displayUV(data) {
 function displayDailyWeather(dailyWeather, timezone) {
   // console.log(dayjs().tz(timezone).add(1, "day").startOf("day").format("M/D/YYYY"))
   for (let i = 1; i < 6; i++) {
-    console.log(dailyWeather[i])
+    // console.log(dailyWeather[i])
 
     // make the elements
+    var card = document.createElement("div")
     var dateDailyEl = document.createElement("h5");
+    // var iconCode = dailyWeather[i].weather.icon;
+    // var iconUrl = "https://openweathermap.org/img/wn/" + iconCode + ".png";
     var humidityDailyEl = document.createElement("p");
     var rightNow1 = dayjs().tz(timezone).add(i, "day").startOf("day").format("M/D/YYYY");
     var tempDailyEl = document.createElement("p");
@@ -141,39 +152,25 @@ function displayDailyWeather(dailyWeather, timezone) {
 
     // assigning values to elements
     dateDailyEl.textContent = rightNow1;
+    // $('#wicon').attr('src', iconUrl);
     tempDailyEl.textContent = "Temp: " + dailyWeather[i].temp.day + "°F";
     windDailyEl.textContent = "Wind: " + dailyWeather[i].wind_speed + " MPH"
     humidityDailyEl.textContent = "Humidity: " + dailyWeather[i].humidity + " %";
 
-    // // add classes
-    // dateDailyEl.classList = "days";
-    // tempDailyEl.classList = "days";
-
     // append them all
-    dailyWeatherEl.appendChild(dateDailyEl);
-    dailyWeatherEl.appendChild(tempDailyEl);
-    dailyWeatherEl.appendChild(windDailyEl);
-    dailyWeatherEl.appendChild(humidityDailyEl);
-    
+    card.appendChild(dateDailyEl);
+    // card.appendChild(iconEl);
+    card.appendChild(tempDailyEl);
+    card.appendChild(windDailyEl);
+    card.appendChild(humidityDailyEl);
+    card.setAttribute("class", "col-md card")
+    dailyWeatherEl.appendChild(card);
   }
 };
 
 
-
+loadCityHistory();
 cityForm.addEventListener("submit", formSubmitHandler);
-// loadCityHistory();
 
 
 
-
-// NEED TO DISPLAY: 
-// - City name
-// - Date
-// - Icon rep. of weather conditions
-// - Temp
-// - Humidity
-// - Wind speed
-// - UV index
-
-// TO ADD A DAY - MAKE A FOR LOOP REPLACE 1 WITH i AND LOOP TRHU 5 DAYS
-//console.log(dayjs().tz(timezone).add(1, "day").startOf("day").format("M/D/YYYY"))
